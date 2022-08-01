@@ -1,0 +1,7 @@
+FROM continuumio/miniconda3:4.12.0
+
+COPY environment.yml /app/environment.yml
+RUN yes | conda env create --name app --file /app/environment.yml && yes | conda clean --all --force-pkgs-dirs
+SHELL ["conda", "run", "--no-capture-output", "--name", "app", "/bin/bash", "-c"]
+COPY webserver/src /app
+CMD python /app/main.py /results/result.dat /results/result.gif

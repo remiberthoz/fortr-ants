@@ -1,0 +1,11 @@
+FROM gcc:12.1.0 AS build
+COPY simulation/Makefile /app/Makefile
+COPY simulation/src /app/src
+WORKDIR /app
+RUN make static=yes
+
+FROM alpine:latest
+COPY --from=build /app/.build/build_latest /app/.build/build_latest
+COPY assets /app/assets
+WORKDIR /app
+CMD .build/build_latest /app/assets/world.dat /results/result.dat

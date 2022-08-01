@@ -1,0 +1,11 @@
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - celluloid
+  - ffmpeg
+  - flask
+  - matplotlib
+  - numpy
+  - scikit-image
+  - scipy

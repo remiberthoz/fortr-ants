@@ -1,0 +1,4 @@
+simulation/.build
+simulation/assets/*.dat
+simulation/assets/*.tif
+!simulation/assets/world.tif
