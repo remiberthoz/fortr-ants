@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FortrAnts</title>
+    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+    <script src="https://unpkg.com/htmx.org@1.8.0" integrity="sha384-cZuAZ+ZbwkNRnrKi05G/fjBX+azI9DNOkNYysZ0I/X5ZFgsmMiBXgDZof30F5ofc" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <h1>FortrAnts</h1>
+
+    <p><button hx-get="/generate.cgi" hx-target="#resultgif" hx-indicator="#spinner">Generate</button></p>
+
+    <div id="spinner" class="lds-ellipsis htmx-indicator"><div></div><div></div><div></div><div></div></div>
+
+    <figure id="resultgif">
+      <img src="/results/result.gif">
+    </figure>
+  </body>
+</html>

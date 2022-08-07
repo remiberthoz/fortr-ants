@@ -1,0 +1,3 @@
+FROM nginx:alpine
+RUN apk add --no-cache fcgiwrap spawn-fcgi netcat-openbsd
+CMD spawn-fcgi -U nginx -G nginx -s /var/run/fcgiwrap.socket -- /usr/bin/fcgiwrap -f && nginx -g 'daemon off;'
