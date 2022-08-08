@@ -8,4 +8,4 @@ FROM alpine:latest
 COPY --from=build /app/.build/build_latest /app/.build/build_latest
 COPY assets /app/assets
 WORKDIR /app
-CMD .build/build_latest /app/assets/world.dat /results/result.dat
+CMD .build/build_latest /app/assets/world.dat /results/result.gif

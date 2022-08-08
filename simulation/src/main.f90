@@ -16,6 +16,8 @@ program fortrants
     character(len=1024) :: output_path
     ! World
     class(World_t), allocatable :: world
+    integer, dimension(:, :, :), allocatable :: pixels
+    integer :: pixels_last_t
 
     call signal(10, set_dump)
     call random_seed()
@@ -29,16 +31,26 @@ program fortrants
 
     do while(.true.)
         if (frames_to_save > 0 .and. t_to_next_save == 0) then
-            call dump_colony(world, colony, output_path)
+            if (.not. allocated(pixels)) then
+                pixels_last_t = 0
+                pixels = rgb_init(frames_to_save, world, colony)
+            end if
+            pixels_last_t = pixels_last_t + 1
+            print *, 'saving: ', pixels_last_t
+            call rgb_colony(world, colony, pixels(pixels_last_t, :, :))
             frames_to_save = frames_to_save - 1
             if (frames_to_save > 0) then
                 t_to_next_save = frame_save_interval
             endif
         endif
+        if (frames_to_save == 0 .and. allocated(pixels)) then
+            print *, 'finishing'
+            call rgb_finish(pixels, output_path)
+        end if
         if (frames_to_save == 0 .and. stop_after_save) then
             print *, "Stopping..."
             call sleep(1)
-            continue
+            cycle
         endif
         call timestep(world, colony)
         t_to_next_save = t_to_next_save - 1
