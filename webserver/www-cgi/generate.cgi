@@ -32,9 +32,19 @@ if [ "$TIMEPOINTS" = "" ] || [ "$FRAMES" = "" ] || [ "$STOP" = "" ]; then
 fi
 
 printf "%s %s %s" "$TIMEPOINTS" "$FRAMES" "$STOP" > /simu-req/request
-echo -e "POST /containers/fortrants_simu/kill?signal=SIGUSR1 HTTP/1.0\r\n" | nc -w 1 -U /var/run/docker.sock
+echo -e "POST /containers/fortrants_simu/kill?signal=SIGUSR1 HTTP/1.0\r\n" | nc -w 1 -U /var/run/docker.sock >> /dev/null
 
-echo "content-type: text/plain"
+echo "Content-Type: text/html; charset=UTF-8"
 echo ""
+echo "<!doctype html>"
+echo "<head>"
+echo "<meta http-equiv='Refresh' content='3;url=/'>"
+echo "<title>FortrAnts</title>"
+echo "</head>"
+echo "<body>"
+echo "<p>"
 echo "Issued request for $TIMEPOINTS timepoints and $FRAMES frames."
+echo "</p>"
+echo "</body>"
+echo "</html>"
 echo ""
