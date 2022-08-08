@@ -9,7 +9,8 @@ services:
     container_name: fortrants_simu
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - results:/results/
+      - results:/results
+      - request:/simu-req
 
   webserver:
     build:
@@ -19,10 +20,13 @@ services:
     expose:
       - 80
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
       - ./webserver/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./webserver/www:/var/www:ro
       - ./webserver/www-cgi:/var/www-cgi:ro
       - results:/var/www-results:ro
+      - request:/simu-req
 
 volumes:
   results:
+  request:

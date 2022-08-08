@@ -11,12 +11,33 @@
   <body>
     <h1>FortrAnts</h1>
 
-    <p><button hx-get="/generate.cgi" hx-target="#resultgif" hx-indicator="#spinner">Generate</button></p>
-
-    <div id="spinner" class="lds-ellipsis htmx-indicator"><div></div><div></div><div></div><div></div></div>
+    <h2>Last result</h2>
 
     <figure id="resultgif">
       <img src="/results/result.gif">
     </figure>
+
+    <h2>Generate new result</h2>
+
+    <form action="/cgi/generate.cgi" method="post">
+      <p>
+        <label>Duration in timepoints</label><br>
+        <input type="number" name="timepoints">
+      </p>
+      <p>
+        <label>Number of frames</label><br>
+        <input type="number" name="frames">
+      </p>
+      <p>
+        <label>Stop after the save</label><br>
+        <label><input type="radio" name="stop" value="T"> Yes</label><br>
+        <label><input type="radio" name="stop" value="F"> No</label><br>
+      </p>
+      <p>
+        <button type="submit">Generate</button>
+        <button type="reset">Reset form</button>
+        <button>Restart simulation form zero</button>
+      </p>
+    </form>
   </body>
 </html>
