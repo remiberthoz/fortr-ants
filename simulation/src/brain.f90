@@ -24,12 +24,12 @@ contains
         call world_init(self%world_view, perception_x, perception_y)
     end subroutine brain_init
 
-    subroutine sense_and_decide(self, holds_food, traveled_distance, world_view, bearing_decision, pheromone_drop_decision, pheromone_drop_amplitude)
+    subroutine sense_and_decide(self, holds_food, traveled_distance, world_view, steer_decision, pheromone_drop_decision, pheromone_drop_amplitude)
         class(Brain_t), intent(inout) :: self
         logical, intent(in) :: holds_food
         integer, intent(in) :: traveled_distance
         class(World_t), intent(in) :: world_view
-        real, intent(out) :: bearing_decision
+        real, intent(out) :: steer_decision
         integer, intent(out) :: pheromone_drop_decision
         real, intent(out) :: pheromone_drop_amplitude
         integer, dimension(2) :: xy
@@ -53,7 +53,7 @@ contains
         endif
 
         ij = real(xy - 1) - real([perception_x-1, perception_y-1]) / 2.
-        bearing_decision = atan2(real(ij(2)), real(ij(1)))
+        steer_decision = atan2(real(ij(2)), real(ij(1)))
     end subroutine sense_and_decide
 
 end module brain_mod

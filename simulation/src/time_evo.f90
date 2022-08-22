@@ -68,7 +68,7 @@ contains
         class(Colony_t), intent(inout) :: colony
         class(World_t), intent(inout) :: world
         integer :: i
-        real :: decided_bearing, steer, new_a, new_x, new_y
+        real :: steer_decision, steer, new_a, new_x, new_y
         integer :: decided_drop_pheromone
         real :: decided_drop_amplitude
         real :: dangle = 3.14/3.
@@ -80,8 +80,8 @@ contains
                 d => colony%distances(i), &
                 holds_food => colony%holds_food(i) &
             )
-            call world%perceive_at(nint(x), nint(y), perception_x, perception_y, brain%world_view)
-            call brain%sense_and_decide(holds_food, d, brain%world_view, decided_bearing, decided_drop_pheromone, decided_drop_amplitude)
+            call world%perceive_at(x, y, a, perception_x, perception_y, brain%world_view)
+            call brain%sense_and_decide(holds_food, d, brain%world_view, steer_decision, decided_drop_pheromone, decided_drop_amplitude)
 
             if (decided_drop_pheromone == 1) then
                 world%pheromone_map(nint(x), nint(y), 1) = max(world%pheromone_map(nint(x), nint(y), 1), decided_drop_amplitude)
@@ -91,7 +91,7 @@ contains
 
             new_x = x + cos(a)
             new_y = y + sin(a)
-            steer = decided_bearing - a
+            steer = steer_decision
             steer = sign(1.0, steer + 3.14) * mod(steer + 3.14, 2*3.14) - 3.14
             steer = min(max(steer, -dangle), +dangle)
             new_a = a + steer
