@@ -43,7 +43,7 @@ $(OUTDIR)/main.o: $(OUTDIR)/brain.o $(OUTDIR)/world.o $(OUTDIR)/colony.o $(OUTDI
 $(OUTDIR)/brain.o: $(OUTDIR)/world.o $(OUTDIR)/random.o
 $(OUTDIR)/colony.o: $(OUTDIR)/brain.o
 $(OUTDIR)/time_evo.o: $(OUTDIR)/colony.o $(OUTDIR)/brain.o $(OUTDIR)/world.o
-$(OUTDIR)/world_io.o: $(OUTDIR)/world.o $(OUTDIR)/colony.o
+$(OUTDIR)/world_io.o: $(OUTDIR)/world.o $(OUTDIR)/colony.o $(OUTDIR)/gif_module.o
 $(OUTDIR)/world.o:
 
 
