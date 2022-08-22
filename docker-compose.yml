@@ -10,7 +10,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - results:/results
-      - request:/simu-req
+      - ./request.txt:/simu-req
 
   webserver:
     build:
@@ -25,7 +25,7 @@ services:
       - ./webserver/www:/var/www:ro
       - ./webserver/www-cgi:/var/www-cgi:ro
       - results:/var/www-results:ro
-      - request:/simu-req
+      - ./request.txt:/simu-req
 
 volumes:
   results:

@@ -31,7 +31,7 @@ if [ "$TIMEPOINTS" = "" ] || [ "$FRAMES" = "" ] || [ "$STOP" = "" ]; then
     exit 0
 fi
 
-printf "%s %s %s" "$TIMEPOINTS" "$FRAMES" "$STOP" > /simu-req/request
+printf "%s %s %s" "$TIMEPOINTS" "$FRAMES" "$STOP" > /simu-req
 echo -e "POST /containers/fortrants_simu/kill?signal=SIGUSR1 HTTP/1.0\r\n" | nc -w 1 -U /var/run/docker.sock >> /dev/null
 
 echo "Content-Type: text/html; charset=UTF-8"

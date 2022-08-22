@@ -14,6 +14,7 @@ program fortrants
     ! Command line parameters
     character(len=1024) :: world_path
     character(len=1024) :: output_path
+    character(len=1024) :: dump_params_path
     ! World
     class(World_t), allocatable :: world
     integer, dimension(:, :, :), allocatable :: pixels
@@ -24,6 +25,7 @@ program fortrants
     ! Get cli params
     call get_command_argument(1, world_path)
     call get_command_argument(2, output_path)
+    call get_command_argument(3, dump_params_path)
     ! Initialize ants and world
     call colony_init(colony, n_ants)
     call read_world(world, world_path)
@@ -67,7 +69,7 @@ contains
 
     subroutine set_dump()
         integer :: save_duration, foo
-        open(file="/simu-req/request", action='read', newunit=foo)
+        open(file=dump_params_path, action='read', newunit=foo)
         read(foo, *) save_duration, frames_to_save, stop_after_save
         close(foo)
         frames_to_save = min(frames_to_save, 500)
