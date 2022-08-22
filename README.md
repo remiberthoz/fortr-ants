@@ -14,6 +14,9 @@ It is not the best ant trail simulation out there, nor the most optimal Fortran 
 
 ---
 
+<div align="center">
+<img alt="Demo" height="410" src="https://user-images.githubusercontent.com/1943662/186022520-f3b38424-781e-41b7-931b-8b696a672faf.gif">
+</div>
 
 
 This simulates ants walking in a 2D world. Ants are looking around to **bring back food to their home**. They communicate with each other by leaving **pheromone trails** along their path. The logic of an ant brain is simple:
